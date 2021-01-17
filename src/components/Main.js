@@ -12,9 +12,15 @@ function Main(props) {
       .then((userData) => {
         setUserInfo(userData)
       })
+      .catch((err) => {
+        console.log(err);
+      })
     api.getCards()
       .then((cardsData) => {
         setCards(cardsData)
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }, [])
   return (
@@ -33,10 +39,11 @@ function Main(props) {
       </section>
       <section className="places">
         {cards.map((item) =>
-          <Card
-            card={item}
-            onCardClick={props.onCardClick}
-          />
+        (<Card
+          card={item}
+          onCardClick={props.onCardClick}
+          key={item._id}
+        />)
         )}
       </section>
     </main>
