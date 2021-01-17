@@ -17,7 +17,7 @@ function Main(props) {
       })
     api.getCards()
       .then((cardsData) => {
-        setCards(cardsData)
+        setCards(cardsData)git 
       })
       .catch((err) => {
         console.log(err);

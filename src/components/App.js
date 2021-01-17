@@ -35,15 +35,15 @@ function App() {
   return (
     <div className="root">
       <div className="page">
-        (<Header />)
-        (<Main
+        <Header />
+        <Main
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
-        />)
-        (<Footer />)
-        (<PopupWithForm
+        />
+        <Footer />
+        <PopupWithForm
           name="edit"
           title="Редактировать профиль"
           isOpen={isEditProfilePopupOpen}
@@ -53,9 +53,9 @@ function App() {
           <span id="name-error" className="popup__error" />
           <input type="text" id="about" minLength={2} maxLength={200} className="popup__form-item popup__form-item_type_about popup__form-item_position_bottom" name="about" placeholder="О себе" required />
           <span id="about-error" className="popup__error" />
-        </PopupWithForm>)
+        </PopupWithForm>
 
-        (<PopupWithForm
+        <PopupWithForm
           name="add"
           title="Новое место"
           isOpen={isAddPlacePopupOpen}
@@ -65,9 +65,9 @@ function App() {
           <span id="card-title-error" className="popup__error" />
           <input type="url" id="card-link" className="popup__form-item popup__form-item_type_img-url popup__form-item_position_bottom" name="link" placeholder="Ссылка на картинку" required />
           <span id="card-link-error" className="popup__error" />
-        </PopupWithForm>)
+        </PopupWithForm>
 
-        (<PopupWithForm
+        <PopupWithForm
           name="avatar"
           title="Обновить аватар"
           isOpen={isEditAvatarPopupOpen}
@@ -75,11 +75,11 @@ function App() {
         >
           <input type="url" id="avatar-link" className="popup__form-item popup__form-item_type_avatar" name="avatar" placeholder="Ссылка на картинку" required />
           <span id="avatar-link-error" className="popup__error" />
-        </PopupWithForm>)
+        </PopupWithForm>
 
-        (<ImagePopup
+        <ImagePopup
           card={selectedCard}
-          onClose={closeAllPopus} />)
+          onClose={closeAllPopus} />
       </div>
     </div>
 
