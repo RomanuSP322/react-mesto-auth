@@ -1,0 +1,12 @@
+.delete-popup__title {
+  padding-bottom: 19px;
+}
+
+
+@media screen and (max-width:768px) {
+  .delete-popup__tittle {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 19px;
+  }
+}

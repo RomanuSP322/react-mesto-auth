@@ -1,0 +1,9 @@
+.popup__title_type_question {
+  padding-bottom: 19px;
+}
+
+@media screen and (max-width:768px) {
+  .popup__title_type_question  {
+    padding-bottom: 19px;
+  }
+}

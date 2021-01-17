@@ -1,0 +1,15 @@
+@import url(./__logo/header__logo.css);
+
+.header {
+  max-width: 882px;   
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  margin: 0 auto;
+  padding: 45px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header {    
+    padding: 28px 0 0;
+  }
+}
+

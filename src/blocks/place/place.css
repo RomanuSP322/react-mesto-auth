@@ -1,0 +1,18 @@
+@import url(./__content/place__content.css);
+@import url(./__image/place__image.css);
+@import url(./__delete-button/place__delete-button.css);
+@import url(./__delete-button/_active/place__delete-button_active.css);
+@import url(./__title/place__title.css);
+@import url(./__like-button/place-like-button.css);
+@import url(./__like-button/_active/place__like-button_active.css);
+@import url(./__like-counter/place__like-counter.css);
+@import url(./__like-wrapper/place__like-wrapper.css);
+
+.place {
+  max-width: 282px;  
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}

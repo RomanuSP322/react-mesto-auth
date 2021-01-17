@@ -1,0 +1,10 @@
+.page-ident{
+
+}
+
+@media screen and (max-width: 768px) {
+  .page-ident {
+    padding: 0 19px 0;
+  }
+}
+

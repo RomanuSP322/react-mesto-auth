@@ -1,0 +1,7 @@
+.place__content {
+  max-width: 246px;
+  margin: 25px 15px 30px 21px;
+  display: flex;  
+  justify-content: space-between;
+  align-items: center;
+}
