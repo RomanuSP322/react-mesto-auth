@@ -1,46 +1,31 @@
 import React from 'react';
-import { api } from '../utils/api';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
-  const [userInfo, setUserInfo] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const currentUser = React.useContext(CurrentUserContext)
 
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then((userData) => {
-        setUserInfo(userData)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    api.getCards()
-      .then((cardsData) => {
-        setCards(cardsData)git 
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [])
   return (
     <main className="content page-ident">
       <section className="profile">
         <div className="profile__avatar-wrapper" >
           <div className="profile__avatar-button" onClick={props.onEditAvatar} />
-          <img src={userInfo.avatar} alt="Аватар" className="profile__avatar" />
+          <img src={currentUser.avatar} alt="Аватар" className="profile__avatar" />
         </div>
         <div className="profile__info">
-          <h1 className="profile__tittle">{userInfo.name}</h1>
+          <h1 className="profile__tittle">{currentUser.name}</h1>
           <button type="button" className="profile__edit-button" onClick={props.onEditProfile} />
-          <p className="profile__subtittle">{userInfo.about}</p>
+          <p className="profile__subtittle">{currentUser.about}</p>
         </div>
         <button type="button" className="profile__add-button" onClick={props.onAddPlace} />
       </section>
       <section className="places">
-        {cards.map((item) =>
+        {props.cards.map((item) =>
         (<Card
           card={item}
+          onCardLike={props.onCardLike}
+          onCardDelete={props.onCardDelete}
           onCardClick={props.onCardClick}
           key={item._id}
         />)
@@ -50,4 +35,4 @@ function Main(props) {
   )
 }
 
-export default Main;
+export default Main
