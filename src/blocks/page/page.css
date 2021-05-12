@@ -1,9 +1,7 @@
-.page {    
-  font-family: 'Inter', 'Arial', sans-serif;
+.page {
+  font-family: "Inter", "Arial", sans-serif;
   color: white;
   max-width: 882px;
-  margin: 0 auto; 
-  
+  margin: 0 auto;
+  min-height: 100vh;
 }
-
-

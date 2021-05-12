@@ -13,9 +13,8 @@
 @import url(./__image/popup__image.css);
 @import url(./__image-title/popup__image-title.css);
 @import url(./__error/popup__error.css);
-
-
-
+@import url(./__status-title/popup__status-title.css);
+@import url(./__status-icon/popup__status-icon.css);
 
 .popup {
   display: flex;
@@ -31,6 +30,5 @@
   align-items: center;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.5s, opacity 0.4s ease-in-out; 
+  transition: visibility 0.5s, opacity 0.4s ease-in-out;
 }
-
