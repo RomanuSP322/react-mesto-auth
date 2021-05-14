@@ -43,6 +43,7 @@ function App() {
   }
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
+    
   }
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
