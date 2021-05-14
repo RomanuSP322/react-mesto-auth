@@ -99,9 +99,8 @@ function App() {
     if (!isLiked) {
       api
         .putLike(card._id)
-        .then((newCard) => {
-          const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-          setCards(newCards);
+        .then((newCard) => {          
+          setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)) );
         })
         .catch((err) => {
           console.log(err);
@@ -109,9 +108,8 @@ function App() {
     } else {
       api
         .deleteLike(card._id)
-        .then((newCard) => {
-          const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-          setCards(newCards);
+        .then((newCard) => {          
+          setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
         })
         .catch((err) => {
           console.log(err);
@@ -129,6 +127,12 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      history.push("/sign-up");
+    }
+  }, []);
+
   React.useEffect(() => {
     api
       .getCards()
@@ -144,10 +148,8 @@ function App() {
     api
       .deleteCard(card._id)
       .then((newCard) => {
-        const newCards = cards.filter((c) =>
-          c._id === card._id ? !newCard : c
+        setCards((cards) => cards.filter((c) => c._id === card._id ? !newCard : c)
         );
-        setCards(newCards);
       })
       .catch((err) => {
         console.log(err);
@@ -192,7 +194,10 @@ function App() {
       setIsLoggedIn(true);
       localStorage.setItem("jwt", token);
       setEmail(data.email);
-    });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   const tokenCheck = () => {
@@ -204,7 +209,10 @@ function App() {
     apiAuth.getContent(jwt).then(({ data }) => {
       setEmail(data.email);
       setIsLoggedIn(true);
-    });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   };
 
   const handleSignOut = () => {
