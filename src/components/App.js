@@ -37,13 +37,14 @@ function App() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
+  const [token, setToken] = useState('');
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-    
   }
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
@@ -61,7 +62,7 @@ function App() {
 
   function handleUpdateUser(userData) {
     api
-      .editProfile(userData)
+      .editProfile(userData, token)
       .then((userData) => {
         setCurrentUser(userData);
       })
@@ -73,18 +74,18 @@ function App() {
 
   React.useEffect(() => {
     api
-      .getUserInfo()
+      .getUserInfo(token)
       .then((userData) => {
         setCurrentUser(userData);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [token]);
 
   function handleUpdateAvatar(userData) {
     api
-      .editAvatar(userData)
+      .editAvatar(userData, token)
       .then((userData) => {
         setCurrentUser(userData);
       })
@@ -99,18 +100,20 @@ function App() {
 
     if (!isLiked) {
       api
-        .putLike(card._id)
-        .then((newCard) => {          
-          setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)) );
+        .putLike(card._id, token)
+        .then((newCard) => {
+          const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+          setCards(newCards);
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
       api
-        .deleteLike(card._id)
-        .then((newCard) => {          
-          setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
+        .deleteLike(card._id, token)
+        .then((newCard) => {
+          const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+          setCards(newCards);
         })
         .catch((err) => {
           console.log(err);
@@ -124,33 +127,29 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push("/main");
+      history.push("./main");
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      history.push("/sign-up");
-    }
-  }, []);
-
   React.useEffect(() => {
     api
-      .getCards()
+      .getCards(token)
       .then((cardsData) => {
         setCards(cardsData);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [token]);
 
   function handleDeleteCard(card) {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, token)
       .then((newCard) => {
-        setCards((cards) => cards.filter((c) => c._id === card._id ? !newCard : c)
+        const newCards = cards.filter((c) =>
+          c._id === card._id ? !newCard : c
         );
+        setCards(newCards);
       })
       .catch((err) => {
         console.log(err);
@@ -159,7 +158,7 @@ function App() {
 
   function handleAddPlaceSubmit(card) {
     api
-      .editCard(card)
+      .editCard(card, token)
       .then((newCard) => {
         setCards([...cards, newCard]);
       })
@@ -179,7 +178,7 @@ function App() {
         })
       )
       .then(() => {
-        history.push("/sign-in");
+        history.push("./sign-in");
       })
       .catch(() =>
         setStatusInfo({
@@ -193,27 +192,24 @@ function App() {
   function handleLogin(data) {
     return apiAuth.authorize(data).then(({ token }) => {
       setIsLoggedIn(true);
+      setToken(token);
       localStorage.setItem("jwt", token);
       setEmail(data.email);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    });
   }
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
+    setToken(jwt);
     if (!jwt) {
+      history.push('./sign-in');
       return;
     }
 
-    apiAuth.getContent(jwt).then(({ data }) => {
+    apiAuth.getContent(jwt).then(( data ) => {
       setEmail(data.email);
       setIsLoggedIn(true);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    });
   };
 
   const handleSignOut = () => {

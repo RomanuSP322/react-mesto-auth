@@ -1,12 +1,9 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.mesto.prs.nomoredomains.monster';
 
 const checkResponse = (response) => {
   return response.ok ? response.json() : Promise.reject();
 }
 
-const headers = {  
-  'Content-Type': 'application/json',
-};
 
 export const register = ({password, email}) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -34,7 +31,7 @@ export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json;  charset=utf-8",
       'Authorization': `Bearer ${token}`,
     },
   })
